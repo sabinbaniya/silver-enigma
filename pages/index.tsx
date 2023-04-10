@@ -4,6 +4,7 @@ import Navbar from "@/src/components/Navbar";
 import Profile from "@/src/components/Profile";
 import Tabs from "@/src/components/Tabs";
 import StatsSection from "@/src/components/Stats";
+import ProjectsSection from "@/src/components/Projects";
 
 const Home: NextPage = () => {
   return (
@@ -17,6 +18,7 @@ const Home: NextPage = () => {
           <Profile />
           <Tabs />
           <StatsSection />
+          <ProjectsSection />
         </main>
       </section>
     </>
