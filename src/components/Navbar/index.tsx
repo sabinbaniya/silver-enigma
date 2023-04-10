@@ -11,7 +11,7 @@ const Navbar = () => {
         </Link>
         <div className="flex items-center space-x-10">
           <div>
-            <div className="relative flex h-11 items-center rounded-lg border-2 border-gray-200 pl-10">
+            <div className="relative flex h-11 items-center rounded-lg border border-gray-200 pl-10">
               <Image
                 height={20}
                 width={20}
@@ -24,7 +24,7 @@ const Navbar = () => {
                 className="-bg-red-300 pr-2 focus:outline-none"
                 placeholder="Search"
               />
-              <button className="mr-0.5 flex h-9 items-center justify-between space-x-1 rounded-md bg-gray-100 px-2 text-gray-500">
+              <button className="mr-1 flex h-9 items-center justify-between space-x-1 rounded-md bg-gray-100 px-2 text-gray-500">
                 <span>Courses</span>
                 <Image
                   height={16}
@@ -53,7 +53,7 @@ const Navbar = () => {
                 alt=""
               />
               <span className="absolute -top-0.5 left-1 grid h-4 w-4 place-items-center rounded-full bg-[#EC4899] text-xs font-semibold text-gray-50">
-                2
+                1
               </span>
             </div>
             <div className="-bg-red-300 relative flex space-x-2">
