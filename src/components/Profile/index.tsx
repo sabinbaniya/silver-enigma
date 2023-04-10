@@ -21,7 +21,7 @@ const Profile = (props: Props) => {
             alt=""
           />
         </div>
-        <div className="rounded-xl rounded-t-none border-2 border-t-0 border-gray-200 py-10 pl-40 pr-10">
+        <div className="rounded-xl rounded-t-none border border-t-0 border-gray-200 py-10 pl-40 pr-10">
           <div className="flex items-center space-x-4">
             <p className="text-3xl font-bold">Anna Cheng</p>
             <span className="rounded-md bg-lime-400 px-2 font-semibold text-lime-950">
