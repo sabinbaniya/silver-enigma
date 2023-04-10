@@ -5,7 +5,7 @@ interface Props {
 }
 
 const Grid = ({ children }: Props) => {
-  return <div className="grid grid-cols-2 gap-4">{children}</div>;
+  return <div className="grid grid-cols-2 gap-6">{children}</div>;
 };
 
 export default Grid;
