@@ -2,6 +2,8 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Navbar from "@/src/components/Navbar";
 import Profile from "@/src/components/Profile";
+import Tabs from "@/src/components/Tabs";
+import StatsSection from "@/src/components/Stats";
 
 const Home: NextPage = () => {
   return (
@@ -13,6 +15,8 @@ const Home: NextPage = () => {
         <Navbar />
         <main className="mx-auto max-w-4xl">
           <Profile />
+          <Tabs />
+          <StatsSection />
         </main>
       </section>
     </>
