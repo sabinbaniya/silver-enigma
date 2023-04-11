@@ -4,10 +4,12 @@ import Card from "../Card";
 interface Props {
   src: string;
   title: string;
-  location: string;
-  office: string;
+  subtitle: {
+    first: string;
+    second?: string;
+  };
   duration: string;
-  description: string;
+  description?: string;
   responsiblities?: string[];
 }
 
@@ -15,8 +17,7 @@ const DetailedCard = ({
   src,
   description,
   duration,
-  location,
-  office,
+  subtitle: { first, second },
   title,
   responsiblities,
 }: Props) => {
@@ -31,17 +32,21 @@ const DetailedCard = ({
             src={src}
             alt=""
           />
-          <div className="">
+          <div className="w-full">
             <p className="text-lg font-semibold">{title}</p>
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2 ">
-                <span>{location}</span>
-                <span className="h-1 w-1 rounded-lg bg-gray-600" />
-                <span>{office}</span>
+                <span>{first}</span>
+                {second && (
+                  <>
+                    <span className="h-1 w-1 rounded-lg bg-gray-600" />
+                    <span>{second}</span>
+                  </>
+                )}
               </div>
               <span className="text-lg font-semibold">{duration}</span>
             </div>
-            <p className="pt-4 text-gray-600">{description}</p>
+            {description && <p className="pt-4 text-gray-600">{description}</p>}
             {responsiblities && (
               <div>
                 <p className="pt-4 font-semibold">Job responsiblities:</p>
