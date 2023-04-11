@@ -1,10 +1,11 @@
+import Navbar from "@/src/components/Navbar";
+import PlaygroundsSection from "@/src/components/Playgrounds";
+import Profile from "@/src/components/Profile";
+import ProjectsSection from "@/src/components/Projects";
+import StatsSection from "@/src/components/Stats";
+import Tabs from "@/src/components/Tabs";
 import type { NextPage } from "next";
 import Head from "next/head";
-import Navbar from "@/src/components/Navbar";
-import Profile from "@/src/components/Profile";
-import Tabs from "@/src/components/Tabs";
-import StatsSection from "@/src/components/Stats";
-import ProjectsSection from "@/src/components/Projects";
 
 const Home: NextPage = () => {
   return (
@@ -19,6 +20,7 @@ const Home: NextPage = () => {
           <Tabs />
           <StatsSection />
           <ProjectsSection />
+          <PlaygroundsSection />
         </main>
       </section>
     </>
