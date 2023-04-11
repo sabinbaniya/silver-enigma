@@ -1,3 +1,4 @@
+import CertificatesSection from "@/src/components/Certificates";
 import Navbar from "@/src/components/Navbar";
 import PlaygroundsSection from "@/src/components/Playgrounds";
 import Profile from "@/src/components/Profile";
@@ -21,6 +22,7 @@ const Home: NextPage = () => {
           <StatsSection />
           <ProjectsSection />
           <PlaygroundsSection />
+          <CertificatesSection />
         </main>
       </section>
     </>
