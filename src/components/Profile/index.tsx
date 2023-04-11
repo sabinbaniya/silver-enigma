@@ -103,7 +103,7 @@ const Profile = (props: Props) => {
                 <Image
                   height={24}
                   width={24}
-                  src="/assets/icons/linkedin.svg"
+                  src="/assets/icons/linked-in.svg"
                   alt=""
                 />
               </div>
