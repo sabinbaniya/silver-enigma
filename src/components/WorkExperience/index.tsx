@@ -13,8 +13,10 @@ const WorkExperienceSection = ({}: Props) => {
             <DetailedCard
               src="/assets/icons/google.svg"
               title="Front-end Developer at Google"
-              location="London"
-              office="Google Inc"
+              subtitle={{
+                first: "London",
+                second: "Google Inc",
+              }}
               duration="May 2021 - Present"
               description="This role would be great for a web developer with 3+ year's
                 experience in designing and developing responsive websites. This
@@ -25,8 +27,10 @@ const WorkExperienceSection = ({}: Props) => {
             <DetailedCard
               src="/assets/icons/facebook.svg"
               title="Junior Front-end Developer at Meta"
-              location="New York"
-              office="Meta Inc"
+              subtitle={{
+                first: "New York",
+                second: "Meta Inc",
+              }}
               duration="July 2020 - May 2021"
               description="This role would be great for a web developer with 3+ years' experience in designing and developing responsive websites."
               responsiblities={[
