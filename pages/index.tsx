@@ -8,6 +8,7 @@ import Profile from "@/src/components/Profile";
 import ProjectsSection from "@/src/components/Projects";
 import StatsSection from "@/src/components/Stats";
 import Tabs from "@/src/components/Tabs";
+import TechSkillsSection from "@/src/components/TechSkills";
 import WorkExperienceSection from "@/src/components/WorkExperience";
 import { TabsValue } from "@/src/types/tabs";
 import { AnimatePresence, motion } from "framer-motion";
@@ -73,6 +74,7 @@ const Home: NextPage = () => {
                 <AboutMeSection />
                 <WorkExperienceSection />
                 <EducationSection />
+                <TechSkillsSection />
               </motion.section>
             )}
           </AnimatePresence>
