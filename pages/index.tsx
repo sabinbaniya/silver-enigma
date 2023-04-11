@@ -1,6 +1,7 @@
 import { activeTabAtom } from "@/src/atoms/activeTabAtom";
 import AboutMeSection from "@/src/components/AboutMe";
 import CertificatesSection from "@/src/components/Certificates";
+import EducationSection from "@/src/components/Education";
 import Navbar from "@/src/components/Navbar";
 import PlaygroundsSection from "@/src/components/Playgrounds";
 import Profile from "@/src/components/Profile";
@@ -71,6 +72,7 @@ const Home: NextPage = () => {
               >
                 <AboutMeSection />
                 <WorkExperienceSection />
+                <EducationSection />
               </motion.section>
             )}
           </AnimatePresence>
