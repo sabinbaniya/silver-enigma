@@ -4,7 +4,6 @@ import CertificatesSection from "@/src/components/Certificates";
 import EducationSection from "@/src/components/Education";
 import InterestsSection from "@/src/components/Interests";
 import LanguagesSection from "@/src/components/LanguagesSection";
-import Navbar from "@/src/components/Navbar";
 import PlaygroundsSection from "@/src/components/Playgrounds";
 import Profile from "@/src/components/Profile";
 import ProjectsSection from "@/src/components/Projects";
@@ -12,6 +11,7 @@ import StatsSection from "@/src/components/Stats";
 import Tabs from "@/src/components/Tabs";
 import TechSkillsSection from "@/src/components/TechSkills";
 import WorkExperienceSection from "@/src/components/WorkExperience";
+import { MainLayout } from "@/src/layout";
 import { TabsValue } from "@/src/types/tabs";
 import { AnimatePresence, motion } from "framer-motion";
 import { useAtom } from "jotai";
@@ -25,8 +25,7 @@ const Home: NextPage = () => {
       <Head>
         <title>Your Profile</title>
       </Head>
-      <section>
-        <Navbar />
+      <MainLayout>
         <main className="mx-auto max-w-4xl">
           <Profile />
           <Tabs />
@@ -83,7 +82,7 @@ const Home: NextPage = () => {
             )}
           </AnimatePresence>
         </main>
-      </section>
+      </MainLayout>
     </>
   );
 };
