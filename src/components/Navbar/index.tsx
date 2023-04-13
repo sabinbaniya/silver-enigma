@@ -1,10 +1,10 @@
 import Image from "next/image";
-import Polygon from "../svg/Polygon";
 import Link from "next/link";
+import Polygon from "../svg/Polygon";
 
 const Navbar = () => {
   return (
-    <>
+    <div className="sticky top-0 z-50 bg-white">
       <nav className="mx-auto flex h-20 w-11/12 max-w-7xl items-center justify-between">
         <Link legacyBehavior href="/">
           <a className="text-lg font-bold">codedamn</a>
@@ -15,7 +15,7 @@ const Navbar = () => {
               <Image
                 height={20}
                 width={20}
-                src="./assets/icons/search.svg"
+                src="/assets/icons/search.svg"
                 alt=""
                 className="absolute left-2 top-1/2 -translate-y-1/2"
               />
@@ -29,7 +29,7 @@ const Navbar = () => {
                 <Image
                   height={16}
                   width={16}
-                  src="./assets/icons/arrow.svg"
+                  src="/assets/icons/arrow.svg"
                   alt=""
                 />
               </button>
@@ -56,26 +56,28 @@ const Navbar = () => {
                 1
               </span>
             </div>
-            <div className="-bg-red-300 relative flex space-x-2">
-              <Image
-                height={32}
-                width={32}
-                src="/assets/images/avatar.png"
-                alt=""
-              />
-              <span className="absolute -right-10 -top-10">
-                <span className="relative">
-                  <Polygon />
-                  <span className="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 text-xs font-semibold text-gray-50">
-                    5
+            <Link href="/settings/profile">
+              <div className="relative flex space-x-2">
+                <Image
+                  height={32}
+                  width={32}
+                  src="/assets/images/avatar.png"
+                  alt=""
+                />
+                <span className="absolute -right-10 -top-10">
+                  <span className="relative">
+                    <Polygon />
+                    <span className="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 text-xs font-semibold text-gray-50">
+                      5
+                    </span>
                   </span>
                 </span>
-              </span>
-            </div>
+              </div>
+            </Link>
           </div>
         </div>
       </nav>
-    </>
+    </div>
   );
 };
 
