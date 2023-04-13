@@ -6,6 +6,11 @@ body {
   font-weight: 400;
 }
 
+/* hide dropdown arrow of default select html element  */
+select {
+  appearance: none;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
