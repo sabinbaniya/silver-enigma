@@ -1,13 +1,22 @@
+import SocialSettings from "@/src/components/Settings/Socials";
 import { MainLayout, SettingsLayout } from "@/src/layout";
+import Head from "next/head";
 
 interface Props {}
-const SocialSettings = (props: Props) => {
+const Social = (props: Props) => {
   return (
     <>
+      <Head>
+        <title>Your Social Settings</title>
+      </Head>
       <MainLayout>
-        <SettingsLayout>Socials Content</SettingsLayout>
+        <SettingsLayout>
+          <>
+            <SocialSettings />
+          </>
+        </SettingsLayout>
       </MainLayout>
     </>
   );
 };
-export default SocialSettings;
+export default Social;
