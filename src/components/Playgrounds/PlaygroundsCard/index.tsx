@@ -1,15 +1,47 @@
 import Image from "next/image";
 import Card from "../../common/Card";
 
-interface Props {
+type Props = {
   src: string;
+} & (OtherProps | SettingsProps);
+
+interface SettingsProps {
+  fromSettings?: true;
+  selected?: boolean;
+  onClick?: Function;
 }
 
-const PlaygroundsCard = ({ src }: Props) => {
+interface OtherProps {
+  fromSettings?: never;
+  selected?: never;
+  onClick?: never;
+}
+
+const PlaygroundsCard = ({ src, fromSettings, selected, onClick }: Props) => {
   return (
     <>
       <Card>
-        <div className="flex items-start space-x-4 p-4">
+        <div
+          className={`relative flex items-start space-x-4 rounded-lg p-4 ${
+            selected
+              ? "border-[3px] border-indigo-600"
+              : "border-[3px] border-transparent"
+          } ${onClick ? "cursor-pointer" : ""}`}
+          onClick={() => onClick?.()}
+        >
+          {fromSettings && (
+            <div
+              className={`absolute right-4 top-4 h-6 w-6 rounded-full border-2 ${
+                selected
+                  ? "border-transparent bg-indigo-600"
+                  : "border-gray-400 bg-white"
+              }`}
+            >
+              <div className="relative h-full w-full rounded-full">
+                <div className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white" />
+              </div>
+            </div>
+          )}
           <Image height={48} width={48} src={src} alt="" />
           <div className="space-y-1">
             <p className="text-xl font-semibold">Playground title</p>
