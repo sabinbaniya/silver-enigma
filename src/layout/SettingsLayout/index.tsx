@@ -15,34 +15,36 @@ const SettingsLayout = ({ children }: Props) => {
     <>
       <div className="mx-auto flex w-11/12 max-w-7xl">
         <aside className="h-min basis-1/5 pt-10">
-          <Card>
-            <div className="relative flex flex-col space-y-6 py-8 ">
-              <NavigationLink
-                href="/settings/profile"
-                icon={<HiUserCircle className="text-xl" />}
-              >
-                Profile
-              </NavigationLink>
-              <NavigationLink
-                href="/settings/socials"
-                icon={<IoShareSocialSharp className="text-lg" />}
-              >
-                Socials
-              </NavigationLink>
-              <NavigationLink
-                href="/settings/portfolio"
-                icon={<FaPortrait className="text-lg" />}
-              >
-                Portfolio
-              </NavigationLink>
-              <NavigationLink
-                href="/settings/resume"
-                icon={<IoIosPaper className="text-lg" />}
-              >
-                Resume
-              </NavigationLink>
-            </div>
-          </Card>
+          <div className="fixed w-64">
+            <Card>
+              <div className="flex flex-col space-y-6 py-8 ">
+                <NavigationLink
+                  href="/settings/profile"
+                  icon={<HiUserCircle className="text-xl" />}
+                >
+                  Profile
+                </NavigationLink>
+                <NavigationLink
+                  href="/settings/socials"
+                  icon={<IoShareSocialSharp className="text-lg" />}
+                >
+                  Socials
+                </NavigationLink>
+                <NavigationLink
+                  href="/settings/portfolio"
+                  icon={<FaPortrait className="text-lg" />}
+                >
+                  Portfolio
+                </NavigationLink>
+                <NavigationLink
+                  href="/settings/resume"
+                  icon={<IoIosPaper className="text-lg" />}
+                >
+                  Resume
+                </NavigationLink>
+              </div>
+            </Card>
+          </div>
         </aside>
         <main className="basis-4/5 px-16 py-10">{children}</main>
       </div>
