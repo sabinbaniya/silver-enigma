@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 interface Props {
   children: ReactNode;
   style: keyof typeof ButtonStyles;
+  onClick?: Function;
 }
 
 const ButtonStyles = {
@@ -10,9 +11,10 @@ const ButtonStyles = {
   secondary: "bg-gray-100 text-gray-800",
 };
 
-const Button = ({ children, style }: Props) => {
+const Button = ({ children, style, onClick }: Props) => {
   return (
     <button
+      onClick={() => onClick?.()}
       className={`rounded-lg p-2 px-4 font-semibold ${ButtonStyles[style]}`}
     >
       {children}
