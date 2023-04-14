@@ -15,7 +15,7 @@ const Select = <T extends FieldValues>({
   return (
     <div className="relative">
       <select
-        className="peer h-10 w-full rounded-lg border-2 border-gray-200 px-4 outline-none transition-all focus:border-gray-400 focus:outline-none"
+        className="peer h-12 w-full rounded-lg border-2 border-gray-200 px-4 outline-none transition-all focus:border-gray-400 focus:outline-none"
         {...register(name)}
       >
         {options?.map((el) => (
