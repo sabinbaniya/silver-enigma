@@ -44,9 +44,7 @@ const SettingsLayout = ({ children }: Props) => {
             </div>
           </Card>
         </aside>
-        <main className="-bg-gray-400 h-[200vh] basis-4/5 px-16 pt-10">
-          {children}
-        </main>
+        <main className="basis-4/5 px-16 py-10">{children}</main>
       </div>
     </>
   );
