@@ -1,3 +1,7 @@
+import { unsavedChangesAtom } from "@/src/atoms/unsavedChangesAtom";
+import { socialSettingsAtom } from "@/src/atoms/userSocialSettings";
+import { useAtom } from "jotai";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Button from "../../common/Button";
 import InputGroup from "../../common/Forms/InputGroup";
@@ -14,14 +18,35 @@ interface FormFields {
 }
 
 const SocialSettings = (props: Props) => {
+  const [loading, setLoading] = useState(false);
+  const [socialDetails, setSocialDetails] = useAtom(socialSettingsAtom);
+  const [, setUnsavedChanges] = useAtom(unsavedChangesAtom);
+
   const {
     register,
-    formState: { errors },
+    formState: { errors, isDirty },
     handleSubmit,
+    reset,
   } = useForm<FormFields>();
 
+  useEffect(() => {
+    if (socialDetails) {
+      reset(socialDetails);
+    }
+  }, [socialDetails, reset]);
+
+  useEffect(() => {
+    setUnsavedChanges(false);
+    if (isDirty) setUnsavedChanges(true);
+  }, [isDirty, setUnsavedChanges]);
+
   const onsubmit: SubmitHandler<FormFields> = (data) => {
-    console.log(data);
+    setLoading(true);
+    setSocialDetails({ ...data });
+    setUnsavedChanges(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
   };
 
   return (
@@ -71,14 +96,24 @@ const SocialSettings = (props: Props) => {
             errors={errors.behance}
           />
           <div className="flex justify-end space-x-4">
-            <Button style="secondary" onClick={() => {}}>
+            <Button
+              style="secondary"
+              onClick={() => {
+                reset();
+              }}
+              type="button"
+            >
               Cancel
             </Button>
-            <Button style="primary">Save Changes</Button>
+            <Button disabled={!isDirty} loading={loading} style="primary">
+              Save Changes
+            </Button>
           </div>
         </form>
       </div>
     </>
   );
 };
+
+export type { FormFields as ISocialSettings };
 export default SocialSettings;
