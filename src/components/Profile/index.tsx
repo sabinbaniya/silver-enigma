@@ -5,6 +5,7 @@ import { TabsValue } from "@/src/types/tabs";
 import { useAtom } from "jotai";
 import Image from "next/image";
 import Button from "../common/Button";
+import Polygon from "../svg/Polygon";
 import SocialLinks from "./SocialLinks";
 
 type Props = {};
@@ -29,6 +30,14 @@ const Profile = (props: Props) => {
             src="/assets/images/avatar.png"
             alt=""
           />
+          <div className="relative">
+            <span className="absolute -right-8 -top-16">
+              <Polygon />
+              <span className="absolute left-1/2 top-1/2 z-50 -translate-x-[50%] -translate-y-[54%] text-sm font-semibold text-gray-50">
+                5
+              </span>
+            </span>
+          </div>
         </div>
         <div className="rounded-xl rounded-t-none border border-t-0 border-gray-200 py-10 pl-40 pr-10">
           <div className="flex items-center space-x-4">
