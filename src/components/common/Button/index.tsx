@@ -1,9 +1,12 @@
 import { ReactNode } from "react";
+import Loading from "../../svg/Loading";
 
 interface Props {
   children: ReactNode;
   style: keyof typeof ButtonStyles;
   onClick?: Function;
+  loading?: boolean;
+  type?: "button";
 }
 
 const ButtonStyles = {
@@ -11,13 +14,22 @@ const ButtonStyles = {
   secondary: "bg-gray-100 text-gray-800",
 };
 
-const Button = ({ children, style, onClick }: Props) => {
+const Button = ({ children, style, onClick, loading, type }: Props) => {
   return (
     <button
+      type={type}
+      disabled={loading}
       onClick={() => onClick?.()}
-      className={`rounded-lg p-2 px-4 font-semibold ${ButtonStyles[style]}`}
+      className={`relative rounded-lg p-2 px-4 font-semibold ${
+        ButtonStyles[style]
+      } ${loading ? "cursor-wait opacity-80" : ""}`}
     >
-      {children}
+      <span className={loading ? "opacity-0" : "opacity-100"}>{children}</span>
+      <Loading
+        className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${
+          loading ? "opacity-100" : "opacity-0"
+        }`}
+      />
     </button>
   );
 };
