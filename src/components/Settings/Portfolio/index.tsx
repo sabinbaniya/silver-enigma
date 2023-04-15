@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { unsavedChangesAtom } from "@/src/atoms/unsavedChangesAtom";
+import { userPortfolioSettingsAtom } from "@/src/atoms/userPortfolioSettings";
+import { useAtom } from "jotai";
+import { useEffect, useState } from "react";
 import PlaygroundsCard from "../../Playgrounds/PlaygroundsCard";
 import ProjectsCard from "../../Projects/ProjectsCard";
 import Button from "../../common/Button";
@@ -6,22 +9,68 @@ import Grid from "../../common/Grid";
 import SectionHeading from "../../common/SectionHeading";
 
 interface Props {}
+
+interface ItemsState {
+  playgrounds: Array<number>;
+  projects: Array<number>;
+}
+
+const defaultSelectedItems = {
+  playgrounds: [],
+  projects: [],
+};
+
 const PortfolioSettings = (props: Props) => {
-  const [selectedPlaygrounds, setSelectedPlaygrounds] = useState(
-    [] as number[]
-  );
+  const [loading, setLoading] = useState(false);
+  const [selectedItems, setSelectedItems] =
+    useState<ItemsState>(defaultSelectedItems);
 
-  const handleClick = (idx: number) => {
-    console.log(idx, selectedPlaygrounds, "inside handle");
+  const [, setUnsavedChanges] = useAtom(unsavedChangesAtom);
+  const [showCaseItems, setShowcaseItems] = useAtom(userPortfolioSettingsAtom);
 
-    if (selectedPlaygrounds.includes(idx)) {
-      setSelectedPlaygrounds((prev) => prev.filter((el) => el !== idx));
+  const isChanged =
+    JSON.stringify(selectedItems) !== JSON.stringify(showCaseItems);
+
+  useEffect(() => {
+    if (showCaseItems) {
+      setUnsavedChanges(false);
+      setSelectedItems(showCaseItems);
+    }
+  }, [showCaseItems, setUnsavedChanges]);
+
+  const isSelected = (idx: number, type: keyof typeof selectedItems) => {
+    return selectedItems[type].includes(idx);
+  };
+
+  const handleClick = (idx: number, type: keyof typeof selectedItems) => {
+    setUnsavedChanges(true);
+    if (selectedItems[type].includes(idx)) {
+      setSelectedItems((prev) => ({
+        ...prev,
+        [type]: prev[type].filter((el) => el !== idx),
+      }));
     } else {
-      setSelectedPlaygrounds((prev) => [...prev, idx]);
+      setSelectedItems((prev) => ({ ...prev, [type]: [...prev[type], idx] }));
     }
   };
 
-  console.log(selectedPlaygrounds, "selected");
+  const handleSave = () => {
+    setLoading(true);
+    setShowcaseItems(selectedItems);
+    setUnsavedChanges(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  };
+
+  const handleCancel = () => {
+    setUnsavedChanges(false);
+    if (showCaseItems) setSelectedItems(showCaseItems);
+  };
+
+  // console.log(selectedItems, showCaseItems);
+  // console.count("portfolio settings");
+  // console.log(isChanged);
 
   return (
     <>
@@ -34,26 +83,26 @@ const PortfolioSettings = (props: Props) => {
           />
           <Grid>
             <PlaygroundsCard
-              selected={selectedPlaygrounds.includes(0)}
-              onClick={() => handleClick(0)}
+              selected={isSelected(0, "playgrounds")}
+              onClick={() => handleClick(0, "playgrounds")}
               fromSettings
               src="/assets/icons/html-5.svg"
             />
             <PlaygroundsCard
-              selected={selectedPlaygrounds.includes(1)}
-              onClick={() => handleClick(1)}
+              selected={isSelected(1, "playgrounds")}
+              onClick={() => handleClick(1, "playgrounds")}
               fromSettings
               src="/assets/icons/javascript.svg"
             />
             <PlaygroundsCard
-              selected={selectedPlaygrounds.includes(2)}
-              onClick={() => handleClick(2)}
+              selected={isSelected(2, "playgrounds")}
+              onClick={() => handleClick(2, "playgrounds")}
               fromSettings
               src="/assets/icons/javascript.svg"
             />
             <PlaygroundsCard
-              selected={selectedPlaygrounds.includes(3)}
-              onClick={() => handleClick(3)}
+              selected={isSelected(3, "playgrounds")}
+              onClick={() => handleClick(3, "playgrounds")}
               fromSettings
               src="/assets/icons/html-5.svg"
             />
@@ -65,29 +114,50 @@ const PortfolioSettings = (props: Props) => {
             <ProjectsCard
               src="/assets/images/portfolio.png"
               title="Personal Portfolio Website"
+              fromSettings
+              selected={isSelected(0, "projects")}
+              onClick={() => handleClick(0, "projects")}
             />
             <ProjectsCard
               src="/assets/images/portfolio.png"
               title="Personal Portfolio Website"
+              fromSettings
+              selected={isSelected(1, "projects")}
+              onClick={() => handleClick(1, "projects")}
             />
             <ProjectsCard
               src="/assets/images/portfolio.png"
               title="Personal Portfolio Website"
+              fromSettings
+              selected={isSelected(2, "projects")}
+              onClick={() => handleClick(2, "projects")}
             />
             <ProjectsCard
               src="/assets/images/portfolio.png"
               title="Personal Portfolio Website"
+              fromSettings
+              selected={isSelected(3, "projects")}
+              onClick={() => handleClick(3, "projects")}
             />
           </Grid>
         </div>
         <div className="flex justify-end space-x-4">
-          <Button style="secondary" onClick={() => {}}>
+          <Button style="secondary" onClick={handleCancel}>
             Cancel
           </Button>
-          <Button style="primary">Save Changes</Button>
+          <Button
+            style="primary"
+            loading={loading}
+            disabled={!isChanged}
+            onClick={handleSave}
+          >
+            Save Changes
+          </Button>
         </div>
       </div>
     </>
   );
 };
+
+export type { ItemsState };
 export default PortfolioSettings;
