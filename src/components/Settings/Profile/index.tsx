@@ -140,7 +140,7 @@ const ProfileSettings = (props: Props) => {
                     register={register}
                     name="showAchievement"
                     title="Achievement badges"
-                    subtitle="Shows your relative percentile and proficience"
+                    subtitle="Shows your relative percentile and proficiency"
                   />
                 </div>
               </Card>
