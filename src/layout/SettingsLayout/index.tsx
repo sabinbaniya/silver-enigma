@@ -1,4 +1,6 @@
+import { unsavedChangesAtom } from "@/src/atoms/unsavedChangesAtom";
 import Card from "@/src/components/common/Card";
+import { useAtom } from "jotai";
 import { ReactNode } from "react";
 import { FaPortrait } from "react-icons/fa";
 import { HiUserCircle } from "react-icons/hi";
@@ -11,6 +13,7 @@ interface Props {
 }
 
 const SettingsLayout = ({ children }: Props) => {
+  const [unsavedChanges] = useAtom(unsavedChangesAtom);
   return (
     <>
       <div className="mx-auto flex w-11/12 max-w-7xl">
@@ -44,6 +47,11 @@ const SettingsLayout = ({ children }: Props) => {
                 </NavigationLink>
               </div>
             </Card>
+            {unsavedChanges && (
+              <div className="font-semiboldfont-semibold mt-4 rounded-lg bg-red-500 p-4">
+                You have unsaved chages
+              </div>
+            )}
           </div>
         </aside>
         <main className="basis-4/5 px-16 py-10">{children}</main>
