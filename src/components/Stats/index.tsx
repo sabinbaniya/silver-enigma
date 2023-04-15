@@ -1,9 +1,15 @@
+import { profileSettingsAtom } from "@/src/atoms/userProfileSettings";
+import { useAtom } from "jotai";
 import Grid from "../common/Grid";
 import SectionHeading from "../common/SectionHeading";
 import StatsCard from "./StatsCard";
 
 interface Props {}
 const StatsSection = (props: Props) => {
+  const [userProfile] = useAtom(profileSettingsAtom);
+
+  if (!userProfile?.showAchievement) return null;
+
   return (
     <>
       <section>
@@ -15,11 +21,13 @@ const StatsSection = (props: Props) => {
               value="2"
               src="/assets/icons/lightning.svg"
             />
-            <StatsCard
-              label="Experience points"
-              value="1200"
-              src="/assets/icons/starfour.svg"
-            />
+            {userProfile?.showXP && (
+              <StatsCard
+                label="Experience points"
+                value="1200"
+                src="/assets/icons/starfour.svg"
+              />
+            )}
             <StatsCard
               label="Current league"
               value="Novice"
