@@ -1,13 +1,17 @@
-const Polygon = () => {
+interface Props {
+  className?: string;
+}
+
+const Polygon = ({ className }: Props) => {
   return (
     <>
       <svg
-        width="87"
+        width="88"
         height="88"
-        viewBox="0 0 87 88"
+        viewBox="0 0 88 88"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="scale-[0.7]"
+        className={className}
       >
         <g filter="url(#filter0_d_4_8238)">
           <path
