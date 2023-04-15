@@ -1,9 +1,18 @@
+import { activeTabAtom } from "@/src/atoms/activeTabAtom";
+import { profileSettingsAtom } from "@/src/atoms/userProfileSettings";
+import { socialSettingsAtom } from "@/src/atoms/userSocialSettings";
+import { TabsValue } from "@/src/types/tabs";
+import { useAtom } from "jotai";
 import Image from "next/image";
-import React from "react";
+import Button from "../common/Button";
+import SocialLinks from "./SocialLinks";
 
 type Props = {};
 
 const Profile = (props: Props) => {
+  const [userProfile] = useAtom(profileSettingsAtom);
+  const [socials] = useAtom(socialSettingsAtom);
+  const [activeTab] = useAtom(activeTabAtom);
   return (
     <>
       <div className="relative mt-8">
@@ -23,7 +32,9 @@ const Profile = (props: Props) => {
         </div>
         <div className="rounded-xl rounded-t-none border border-t-0 border-gray-200 py-10 pl-40 pr-10">
           <div className="flex items-center space-x-4">
-            <p className="text-3xl font-bold">Anna Cheng</p>
+            <p className="text-3xl font-bold">
+              {userProfile?.name || "Anna Cheng"}
+            </p>
             <span className="rounded-md bg-lime-400 px-2 font-semibold text-lime-950">
               Pro
             </span>
@@ -33,7 +44,7 @@ const Profile = (props: Props) => {
           </div>
           <div className="mt-2">
             <p className="text-gray-700">
-              Full stack dev at codedamn | Harvard&apos;22
+              {userProfile?.about || "Full stack dev at codedamn | Harvard'22"}
             </p>
           </div>
           <div className="mt-2 flex items-center space-x-2">
@@ -72,63 +83,44 @@ const Profile = (props: Props) => {
             </span>
           </div>
           <div className="my-8 h-0.5 bg-gray-100" />
-
           <div className="flex items-stretch justify-between">
             <div className="flex space-x-4">
-              <div className="rounded-lg border-2 border-gray-200 p-2">
-                <Image
-                  height={24}
-                  width={24}
-                  src="/assets/icons/google.svg"
-                  alt=""
-                />
-              </div>
-              <div className="rounded-lg border-2 border-gray-200 p-2">
-                <Image
-                  height={24}
-                  width={24}
-                  src="/assets/icons/instagram.svg"
-                  alt=""
-                />
-              </div>
-              <div className="rounded-lg border-2 border-gray-200 p-2">
-                <Image
-                  height={24}
-                  width={24}
-                  src="/assets/icons/facebook.svg"
-                  alt=""
-                />
-              </div>
-              <div className="rounded-lg border-2 border-gray-200 p-2">
-                <Image
-                  height={24}
-                  width={24}
-                  src="/assets/icons/linked-in.svg"
-                  alt=""
-                />
-              </div>
-              <div className="rounded-lg border-2 border-gray-200 p-2">
-                <Image
-                  height={24}
-                  width={24}
-                  src="/assets/icons/youtube.svg"
-                  alt=""
-                />
-              </div>
+              <SocialLinks
+                href={socials?.github || "#"}
+                imgSrc="/assets/icons/github.svg"
+              />
+              <SocialLinks
+                href={socials?.instagram || "#"}
+                imgSrc="/assets/icons/instagram.svg"
+              />
+              <SocialLinks
+                href={socials?.facebook || "#"}
+                imgSrc="/assets/icons/facebook.svg"
+              />
+              <SocialLinks
+                href={socials?.linkedin || "#"}
+                imgSrc="/assets/icons/linked-in.svg"
+              />
+              <SocialLinks
+                href={socials?.dribbble || "#"}
+                imgSrc="/assets/icons/dribbble.svg"
+              />
             </div>
-            <div className="flex items-center space-x-4">
-              <button className="rounded-lg bg-gray-100 p-2">
-                <Image
-                  height={24}
-                  width={24}
-                  src="/assets/icons/bookmark.svg"
-                  alt=""
-                />
-              </button>
-              <button className="rounded-lg bg-indigo-600 p-2 px-4 font-semibold text-indigo-50">
-                Contact
-              </button>
-            </div>
+            {activeTab === TabsValue.PORTFOLIO ? (
+              <div className="flex items-center space-x-4">
+                <button className="rounded-lg bg-gray-100 p-2">
+                  <Image
+                    height={24}
+                    width={24}
+                    src="/assets/icons/bookmark.svg"
+                    alt=""
+                  />
+                </button>
+                <Button style="primary">Contact</Button>
+              </div>
+            ) : (
+              <Button style="secondary">Follow</Button>
+            )}
           </div>
         </div>
       </div>
