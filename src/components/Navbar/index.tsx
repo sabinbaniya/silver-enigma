@@ -66,8 +66,8 @@ const Navbar = () => {
                 />
                 <span className="absolute -right-10 -top-10">
                   <span className="relative">
-                    <Polygon />
-                    <span className="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 text-xs font-semibold text-gray-50">
+                    <Polygon className="scale-[0.7]" />
+                    <span className="absolute left-1/2 top-1/2 z-50 -translate-x-[50%] -translate-y-[54%] text-xs font-semibold text-gray-50">
                       5
                     </span>
                   </span>
