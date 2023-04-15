@@ -1,8 +1,12 @@
+import { unsavedChangesAtom } from "@/src/atoms/unsavedChangesAtom";
+import { profileSettingsAtom } from "@/src/atoms/userProfileSettings";
 import SwitchGroup from "@/src/components/Settings/Profile/SwitchGroup";
 import Button from "@/src/components/common/Button";
 import Card from "@/src/components/common/Card";
 import InputGroup from "@/src/components/common/Forms/InputGroup";
+import { useAtom } from "jotai";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 interface Props {}
@@ -20,15 +24,36 @@ interface FormFields {
 }
 
 const ProfileSettings = (props: Props) => {
+  const [loading, setLoading] = useState(false);
+  const [profileDetails, setProfileDetails] = useAtom(profileSettingsAtom);
+  const [, setUnsavedChanges] = useAtom(unsavedChangesAtom);
+
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    reset,
+    formState: { errors, isDirty },
   } = useForm<FormFields>();
 
+  useEffect(() => {
+    if (profileDetails) {
+      reset(profileDetails);
+    }
+  }, [profileDetails, reset]);
+
+  useEffect(() => {
+    setUnsavedChanges(false);
+    if (isDirty) setUnsavedChanges(true);
+  }, [isDirty, setUnsavedChanges]);
+
   const onsubmit: SubmitHandler<FormFields> = (data) => {
-    console.log(data, "submitted");
+    setLoading(true);
+    setProfileDetails({ ...data });
+    setUnsavedChanges(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
   };
 
   return (
@@ -122,14 +147,18 @@ const ProfileSettings = (props: Props) => {
             </div>
           </div>
           <div className="flex justify-end space-x-4">
-            <Button style="secondary" onClick={() => {}}>
+            <Button style="secondary" type="button" onClick={() => reset()}>
               Cancel
             </Button>
-            <Button style="primary">Save Changes</Button>
+            <Button loading={loading} style="primary">
+              Save Changes
+            </Button>
           </div>
         </form>
       </div>
     </>
   );
 };
+
+export type { FormFields as IProfileSettings };
 export default ProfileSettings;
